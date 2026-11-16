@@ -842,8 +842,8 @@ function verifier() { const box = $("#verif"); if (!cour) { box.innerHTML = ""; 
   // date, identité
   if (!date) bad("Date manquante."); else { const j = (new Date(today()) - new Date(date)) / 864e5; if (j < -1) bad("Date dans le futur : vérifiez-la."); else if (j > 730) warn("Pièce de plus de deux ans : vérifiez la date."); else if (cour.dateOk) ok("Date : " + fd(date)); }
   if (!four) warn("Nom du fournisseur manquant.");
-  const sv = siretOk(siret); if (siret) { if (sv) ok("SIRET valide"); else bad("SIRET invalide : un chiffre est mal lu."); }
-  const tv = tvaIOk(tvai, siret); if (tvai) { if (tv === true) ok("N° de TVA du fournisseur valide"); else if (tv === "autre") warn("Le n° de TVA ne correspond pas au SIRET lu."); else if (tv === "etranger") ok("N° de TVA étranger"); else bad("N° de TVA invalide : un caractère est mal lu."); }
+  const sv = siretOk(siret); if (siret) { if (sv) ok("SIRET valide"); else warn("SIRET à vérifier : le contrôle ne tombe pas juste. Si vous l'avez recopié du ticket, vous pouvez valider quand même."); }
+  const tv = tvaIOk(tvai, siret); if (tvai) { if (tv === true) ok("N° de TVA du fournisseur valide"); else if (tv === "autre") warn("Le n° de TVA ne correspond pas au SIRET lu."); else if (tv === "etranger") ok("N° de TVA étranger"); else warn("N° de TVA à vérifier : le contrôle ne tombe pas juste. Si vous l'avez recopié du ticket, vous pouvez valider quand même."); }
   const conn = fournisseurConnu(four); if (conn && conn.siret && siret && conn.siret.slice(0, 9) !== siret.replace(/\D/g, "").slice(0, 9)) warn(`SIRET différent de celui des pièces précédentes de ${four} : vérifiez-le.`);
   // règles comptables
   if (type === "facture" || type === "avoir") { const manque = []; if (!numero) manque.push("n° de facture"); if (!siret) manque.push("SIRET du fournisseur"); if (!client) manque.push("nom du client facturé"); if (tva && !tvai && ht > 150) manque.push("n° de TVA du fournisseur"); if (manque.length) warn("Mention obligatoire absente : " + manque.join(", ") + "."); else ok("Mentions obligatoires de la facture présentes"); }

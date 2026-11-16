@@ -3,7 +3,7 @@ window.KCM = {
   SUPABASE_URL: "https://opmulpaebadrhsdvybqi.supabase.co",
   SUPABASE_CLE: "sb_publishable_TcZrqc-bDrDofajz0VofSw_lbOWz0yH",
   SOCIETE: "Pradel & Associés",
-  VERSION: "1.0.42",
+  VERSION: "1.0.43",
   // Autres moyens de paiement proposés sous « Payé avec » (ceux qui commencent par « Cabinet » comptent comme payés par la société)
   PAYE_AVEC: ["Carte perso Kamel", "Carte perso Stéphanie"],
   // Dossiers où ranger chaque ticket / facture (ceux qui contiennent « perso » ne comptent pas dans l'avance du cabinet)
